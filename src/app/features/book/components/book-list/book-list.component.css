@@ -1,90 +1,92 @@
+.book-list-container {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #0277bd;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 50%;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
 .book-carousel {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
   padding: 20px;
-  background-color: #e8f5e9; /* Verde menta claro */
+  background-color: #e8f5e9;
 }
 
 .book-card {
   width: 250px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  background-color: #ffffff; /* Blanco */
-  color: #37474f; /* Gris oscuro */
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Efecto flotante */
-  }
-
-  .book-image-container {
-    overflow: hidden;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-
-    .book-image {
-      height: 280px;
-      width: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    &:hover .book-image {
-      transform: scale(1.08);
-    }
-  }
+  background-color: #ffffff;
+  color: #37474f;
 }
 
-mat-card-header {
-  padding-bottom: 8px;
-  text-align: center;
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-  mat-card-title {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #0277bd; /* Azul intermedio */
-  }
+.book-image-container {
+  overflow: hidden;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
 
-  mat-card-subtitle {
-    font-size: 0.95em;
-    color: #78909c; /* Gris azulado */
-  }
+.book-image {
+  height: 280px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.book-image-container:hover .book-image {
+  transform: scale(1.08);
 }
 
 .published-date {
   display: flex;
   align-items: center;
-  color: #78909c; /* Gris azulado */
+  color: #78909c;
   font-size: 0.95em;
   margin-top: 12px;
-
-  .date-icon {
-    margin-right: 6px;
-    font-size: 1.2em;
-    color: #0277bd; /* Azul intermedio */
-  }
 }
 
-mat-card-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
+.date-icon {
+  margin-right: 6px;
+  font-size: 1.2em;
+  color: #0277bd;
+}
 
-  .detail-button {
-    padding: 10px 20px;
-    font-weight: bold;
-    color: #ffffff; /* Blanco */
-    border-radius: 20px;
-    text-transform: uppercase;
-    background-color: #4db6ac; /* Verde menta */
-    transition: background-color 0.3s ease;
+.detail-button {
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 20px;
+  text-transform: uppercase;
+  background-color: #4db6ac;
+  transition: background-color 0.3s ease;
+}
 
-    &:hover {
-      background-color: #00897b; /* Verde menta más oscuro en hover */
-    }
-  }
+.detail-button:hover {
+  background-color: #00897b;
 }

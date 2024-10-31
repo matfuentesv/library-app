@@ -1,43 +1,69 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
+import { BookDetailDialogComponent } from '../book-detail-dialog/book-detail-dialog.component';
+import {Book} from '../../../../core/models/book.model';
+import {BookService} from '../../../../core/services/book.service';
 import {
   MatCard,
   MatCardActions,
   MatCardContent,
   MatCardHeader,
-  MatCardImage, MatCardSubtitle,
-  MatCardTitle
+  MatCardImage,
+  MatCardSubtitle, MatCardTitle
 } from '@angular/material/card';
-import {RouterLink} from '@angular/router';
-import {Book} from '../../../../core/models/book.model';
-import {BookService} from '../../../../core/services/book.service';
-import {MatAnchor, MatButton} from '@angular/material/button';
-import {NgForOf} from '@angular/common';
+import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {BookDetailDialogComponent} from '../book-detail-dialog/book-detail-dialog.component';
+import {FormsModule} from '@angular/forms';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-book-list',
-  standalone: true,
   templateUrl: './book-list.component.html',
+  standalone: true,
   imports: [
-    MatCard,
-    MatCardHeader,
+    MatCardActions,
+    MatButton,
+    MatCardContent,
+    MatIcon,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardContent,
-    MatCardActions,
-    RouterLink,
-    MatCardImage,
-    MatAnchor,
+    MatCardHeader,
+    MatCard,
+    FormsModule,
     NgForOf,
-    MatIcon,
-    MatDialogModule,
-    MatButton
+    MatCardImage
   ],
-  styleUrls: ['./book-list.component.scss']
+  styleUrls: ['./book-list.component.css']
 })
-export class BookListComponent  {
+export class BookListComponent implements OnInit {
+  books: Book[] = [];
+  filteredBooks: Book[] = [];
+  searchTerm: string = '';
 
+  constructor(private bookService: BookService, private dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.getBooks();
+  }
+
+  getBooks(): void {
+    this.bookService.getAllBooks().subscribe((data) => {
+      this.books = data;
+      this.filteredBooks = data;
+    });
+  }
+
+  filterBooks(): void {
+    this.filteredBooks = this.books.filter((book) =>
+      book.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  openDetailDialog(book: Book): void {
+    this.dialog.open(BookDetailDialogComponent, {
+      width: '400px',
+      data: book
+    });
+  }
 }
