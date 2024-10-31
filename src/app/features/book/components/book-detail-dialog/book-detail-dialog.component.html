@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ book.title }}</h2>
+<mat-dialog-content class="dialog-content">
+  <img [src]="book.linkImage" alt="{{ book.title }}" class="book-image" />
+  <p><strong>Autor:</strong> {{ book.author }}</p>
+  <p><strong>Género:</strong> {{ book.gender }}</p>
+  <p><strong>Publicado:</strong> {{ book.publishedDate }}</p>
+  <p><strong>Descripción:</strong></p>
+  <p class="description">{{ book.description }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

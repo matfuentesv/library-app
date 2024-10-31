@@ -1,0 +1,29 @@
+/* header.component.css */
+
+nav {
+  background-color: #b3e5fc; /* Azul claro */
+  color: #37474f; /* Gris oscuro */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+h1 {
+  font-size: 1.5em;
+  color: #01579b; /* Azul profundo */
+  margin: 0;
+}
+
+.nav-links a {
+  color: #01579b; /* Azul profundo */
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #0288d1; /* Azul más claro en hover */
+}

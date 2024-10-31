@@ -1,0 +1,8 @@
+/* footer.component.css */
+
+footer {
+  background-color: #b3e5fc; /* Azul claro */
+  color: #37474f; /* Gris oscuro */
+  text-align: center;
+  padding: 10px;
+}
