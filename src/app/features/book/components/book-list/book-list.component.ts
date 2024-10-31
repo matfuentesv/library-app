@@ -38,54 +38,6 @@ import {BookDetailDialogComponent} from '../book-detail-dialog/book-detail-dialo
   ],
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent implements OnInit, OnDestroy {
-  books: Book[] = [];
-  visibleBooks: Book[] = [];
-  currentIndex = 0;
-  private intervalId: any;
+export class BookListComponent  {
 
-  constructor(private bookService: BookService, private dialog: MatDialog) {}
-
-  ngOnInit(): void {
-    this.bookService.getAllBooks().subscribe((data) => {
-      this.books = data;
-      this.updateVisibleBooks();
-      this.startCarousel();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.stopCarousel();
-  }
-
-  startCarousel(): void {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 3000); // Cambia cada 3 segundos
-  }
-
-  stopCarousel(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  }
-
-  updateVisibleBooks(): void {
-    this.visibleBooks = this.books.slice(this.currentIndex, this.currentIndex + 4);
-  }
-
-  nextSlide(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.books.length;
-    if (this.currentIndex + 4 > this.books.length) {
-      this.currentIndex = 0;
-    }
-    this.updateVisibleBooks();
-  }
-
-  openDetailDialog(book: Book): void {
-    this.dialog.open(BookDetailDialogComponent, {
-      width: '400px',
-      data: book
-    });
-  }
 }

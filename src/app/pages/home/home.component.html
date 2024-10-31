@@ -1,4 +1,24 @@
 <div class="home-container">
+  <h1>Bienvenido a la Librería</h1>
+  <p>Descubre nuestra colección de libros:</p>
 
-  <app-book-list></app-book-list>
+  <div class="book-carousel">
+    <mat-card *ngFor="let book of visibleBooks" class="book-card">
+      <div class="book-image-container">
+        <img mat-card-image [src]="book.linkImage" alt="{{ book.title }}" class="book-image" />
+      </div>
+      <mat-card-header>
+        <mat-card-title>{{ book.title }}</mat-card-title>
+        <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="published-date">
+          <mat-icon class="date-icon">calendar_today</mat-icon> {{ book.publishedDate }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions align="start">
+        <button mat-flat-button class="detail-button" (click)="openDetailDialog(book)">Ver detalles</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
