@@ -8,8 +8,20 @@
     <input id="author" formControlName="author" />
   </div>
   <div>
-    <label for="publishedDate">Fecha de Publicación</label>
-    <input id="publishedDate" formControlName="publishedDate" />
+    <label for="gender">Género</label>
+    <input id="gender" formControlName="gender" />
   </div>
-  <button type="submit">Guardar</button>
+  <div>
+    <label for="linkImage">Enlace de Imagen</label>
+    <input id="linkImage" formControlName="linkImage" />
+  </div>
+  <div>
+    <label for="publishedDate">Fecha de Publicación</label>
+    <input id="publishedDate" formControlName="publishedDate" type="date" />
+  </div>
+  <div>
+    <label for="description">Descripción</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+  <button type="submit" mat-button color="primary">{{ book ? 'Actualizar' : 'Agregar' }} Libro</button>
 </form>
