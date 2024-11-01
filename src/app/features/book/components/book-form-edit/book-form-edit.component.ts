@@ -6,7 +6,7 @@ import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-book-form-edit',
@@ -52,8 +52,26 @@ export class BookFormEditComponent {
 
   onSubmit() {
     if (this.bookForm.valid) {
-      this.formSubmit.emit(this.bookForm.value); // Emite el evento
-      this.dialogRef.close(this.bookForm.value);
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¿Deseas actualizar este libro?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, actualizar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.formSubmit.emit(this.bookForm.value); // Emite el formulario solo si se confirma
+          this.dialogRef.close(this.bookForm.value); // Cierra el modal después de confirmar
+          Swal.fire(
+            '¡Actualizado!',
+            'El libro ha sido actualizado correctamente.',
+            'success'
+          );
+        }
+      });
     }
   }
 }
