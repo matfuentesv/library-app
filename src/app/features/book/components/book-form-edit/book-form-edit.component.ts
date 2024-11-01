@@ -35,7 +35,7 @@ export class BookFormEditComponent implements OnInit {
       author: ['', Validators.required],
       gender: ['', Validators.required],
       linkImage: [''],
-      publishedDate: ['', Validators.required],
+      publishedDate: [new Date(), Validators.required],
       description: ['']
     });
   }

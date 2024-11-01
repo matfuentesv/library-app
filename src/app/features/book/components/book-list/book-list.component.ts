@@ -80,8 +80,8 @@ export class BookListComponent implements OnInit {
     const dialogRef = this.dialog.open(BookFormEditComponent, {
       width: '500px',
       data: book,
-      disableClose: true,
-      panelClass: 'custom-modal' // Aplica la clase personalizada
+      disableClose: false,
+      panelClass: 'custom-modal'
     });
 
     dialogRef.componentInstance.formSubmit.subscribe((updatedBook: Book) => {
