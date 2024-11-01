@@ -1,12 +1,40 @@
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 20px;
-  max-width: 500px;
+.custom-modal .mat-dialog-container {
+  border-radius: 12px;
+  padding: 24px;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 90%;
 }
 
-.form-actions {
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas */
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.form-container .full-width {
+  grid-column: span 2;
+}
+
+.mat-dialog-title {
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.mat-dialog-actions {
+  grid-column: span 2;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  padding-top: 16px;
 }

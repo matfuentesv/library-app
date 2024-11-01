@@ -19,7 +19,7 @@ import {
 import {MatIcon} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
 import {BookFormEditComponent} from '../book-form-edit/book-form-edit.component';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -114,10 +114,28 @@ export class BookListComponent implements OnInit {
   }
 
   deleteBook(id: any): void {
-    this.loading = true;
-    this.bookService.deleteBook(id).subscribe(() => {
-      this.getBooks();
-      this.loading = false;
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Esta acción no se puede deshacer",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.loading = true;
+        this.bookService.deleteBook(id).subscribe(() => {
+          this.getBooks(); // Refresca la lista después de la eliminación
+          this.loading = false;
+          Swal.fire(
+            '¡Eliminado!',
+            'El libro ha sido eliminado correctamente.',
+            'success'
+          );
+        });
+      }
     });
   }
 
