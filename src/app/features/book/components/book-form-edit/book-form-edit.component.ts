@@ -5,6 +5,7 @@ import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 
 
 @Component({
@@ -17,40 +18,42 @@ import {MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle} from '@angular/material/d
     MatInput,
     MatButton,
     MatLabel,
-    MatDialogTitle
+    MatDialogTitle,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatDatepicker
   ],
   styleUrls: ['./book-form-edit.component.css']
 })
-export class BookFormEditComponent implements OnInit {
-  @Output() formSubmit = new EventEmitter<Book>();
+export class BookFormEditComponent {
+  @Output() formSubmit = new EventEmitter<any>();
+
   bookForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<BookFormEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Book // Recibe los datos pasados al modal
+    private dialogRef: MatDialogRef<BookFormEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.bookForm = this.fb.group({
-      title: ['', Validators.required],
-      author: ['', Validators.required],
-      gender: ['', Validators.required],
-      linkImage: [''],
-      publishedDate: [new Date(), Validators.required],
-      description: ['']
+      id: [data.id],
+      title: [data.title, Validators.required],
+      author: [data.author, Validators.required],
+      gender: [data.gender, Validators.required],
+      linkImage: [data.linkImage, Validators.required],
+      publishedDate: [this.convertToDate(data.publishedDate), Validators.required],
+      description: [data.description, Validators.required],
     });
   }
 
-  ngOnInit(): void {
-    if (this.data) {
-      this.bookForm.patchValue(this.data); // Precarga los datos en el formulario
-    }
+  private convertToDate(date: any): Date | null {
+    return typeof date === 'string' ? new Date(date) : date;
   }
 
-  onSubmit(): void {
+  onSubmit() {
     if (this.bookForm.valid) {
-      const updatedBook: Book = { ...this.data, ...this.bookForm.value };
-      this.formSubmit.emit(updatedBook);
-      this.dialogRef.close();
+      this.formSubmit.emit(this.bookForm.value); // Emite el evento
+      this.dialogRef.close(this.bookForm.value);
     }
   }
 }

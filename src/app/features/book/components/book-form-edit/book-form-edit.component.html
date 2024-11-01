@@ -22,8 +22,11 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Fecha de Publicación</mat-label>
-    <input matInput formControlName="publishedDate" type="date" />
+    <input matInput [matDatepicker]="picker" formControlName="publishedDate" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
 
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Descripción</mat-label>

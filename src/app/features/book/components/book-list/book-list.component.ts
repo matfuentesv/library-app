@@ -76,19 +76,25 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  openEditForm(book: Book): void {
+  openEditForm(book: any): void {
     const dialogRef = this.dialog.open(BookFormEditComponent, {
-      width: '500px',
+      width: '600px',
       data: book,
-      disableClose: false,
-      panelClass: 'custom-modal'
     });
 
-    dialogRef.componentInstance.formSubmit.subscribe((updatedBook: Book) => {
-      this.updateBook(updatedBook);
-      dialogRef.close();
+    // Suscríbete al evento formSubmit para actualizar el libro existente
+    dialogRef.componentInstance.formSubmit.subscribe((updatedBook: any) => {
+      // Llama al método updateBook y no createBook
+      this.bookService.updateBook(updatedBook).subscribe(() => {
+        this.getBooks(); // Refresca la lista después de actualizar
+      });
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      // Opcional: lógica adicional después de cerrar el modal
     });
   }
+
 
 
   createBook(book: Book): void {
