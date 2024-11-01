@@ -1,24 +1,15 @@
 <div class="book-list-container">
   <h1>Listado de Libros</h1>
 
-  <!-- Spinner de carga -->
-  <div *ngIf="loading" class="loading-spinner-overlay">
-    <mat-spinner></mat-spinner>
-  </div>
-
   <div class="search-bar">
     <input
       type="text"
       placeholder="Buscar por título"
       [(ngModel)]="searchTerm"
       (input)="filterBooks()" />
-    <button mat-flat-button color="primary" (click)="openForm()">Agregar Libro</button>
+    <button mat-flat-button color="primary" (click)="openCreateForm()">Agregar Libro</button>
   </div>
 
-  <!-- Formulario de agregar/editar libro -->
-  <app-book-form *ngIf="showForm" [book]="selectedBook" (formSubmit)="onFormSubmit($event)"></app-book-form>
-
-  <!-- Listado de libros -->
   <div class="book-carousel">
     <mat-card *ngFor="let book of filteredBooks" class="book-card">
       <div class="book-image-container">
@@ -34,8 +25,7 @@
         </p>
       </mat-card-content>
       <mat-card-actions align="start">
-        <button mat-flat-button class="detail-button" (click)="openDetailDialog(book)">Ver detalles</button>
-        <button mat-button color="accent" (click)="editBook(book)">Editar</button>
+        <button mat-flat-button class="detail-button" (click)="openEditForm(book)">Editar</button>
         <button mat-button color="warn" (click)="deleteBook(book.id)">Eliminar</button>
       </mat-card-actions>
     </mat-card>

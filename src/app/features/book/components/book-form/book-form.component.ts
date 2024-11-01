@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Book} from '../../../../core/models/book.model';
-import {BookService} from '../../../../core/services/book.service';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 
 
@@ -10,17 +11,19 @@ import {MatButton} from '@angular/material/button';
   templateUrl: './book-form.component.html',
   standalone: true,
   imports: [
+    MatFormField,
+    MatInput,
     ReactiveFormsModule,
-    MatButton
+    MatButton,
+    MatLabel
   ],
   styleUrls: ['./book-form.component.css']
 })
-export class BookFormComponent implements OnInit {
-  @Input() book: Book | null = null; // Si existe, es edición; si no, es nuevo
+export class BookFormComponent {
   @Output() formSubmit = new EventEmitter<Book>();
   bookForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private bookService: BookService) {
+  constructor(private fb: FormBuilder) {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       author: ['', Validators.required],
@@ -31,16 +34,10 @@ export class BookFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    if (this.book) {
-      this.bookForm.patchValue(this.book); // Cargar datos en caso de edición
-    }
-  }
-
   onSubmit(): void {
     if (this.bookForm.valid) {
-      const bookData: Book = { ...this.book, ...this.bookForm.value };
-      this.formSubmit.emit(bookData); // Emitir los datos del libro
+      const bookData: Book = this.bookForm.value;
+      this.formSubmit.emit(bookData);
       this.bookForm.reset();
     }
   }

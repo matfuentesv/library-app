@@ -18,6 +18,7 @@ import {
 } from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
+import {BookFormEditComponent} from '../book-form-edit/book-form-edit.component';
 
 @Component({
   selector: 'app-book-list',
@@ -45,8 +46,6 @@ export class BookListComponent implements OnInit {
   books: Book[] = [];
   filteredBooks: Book[] = [];
   searchTerm: string = '';
-  showForm: boolean = false;
-  selectedBook: Book | null = null;
   loading: boolean = false;
 
   constructor(private bookService: BookService, private dialog: MatDialog) {}
@@ -55,22 +54,64 @@ export class BookListComponent implements OnInit {
     this.getBooks();
   }
 
-  // Obtiene la lista de libros con un delay para ver el spinner
   getBooks(): void {
     this.loading = true;
     this.bookService.getAllBooks().subscribe((data) => {
       this.books = data;
       this.filteredBooks = data;
-      setTimeout(() => {
-        this.loading = false; // Desactiva el spinner después de un delay
-      }, 500); // Delay de 500ms
+      this.loading = false;
     });
   }
 
-  openDetailDialog(book: Book): void {
-    this.dialog.open(BookDetailDialogComponent, {
-      width: '400px',
-      data: book
+  openCreateForm(): void {
+    const dialogRef = this.dialog.open(BookFormComponent, {
+      width: '500px',
+      disableClose: true, // Evita el cierre accidental del modal
+      panelClass: 'custom-modal' // Clase personalizada para estilos del modal
+    });
+
+    dialogRef.componentInstance.formSubmit.subscribe((newBook: Book) => {
+      this.createBook(newBook);
+      dialogRef.close();
+    });
+  }
+
+  openEditForm(book: Book): void {
+    const dialogRef = this.dialog.open(BookFormEditComponent, {
+      width: '500px',
+      data: book,
+      disableClose: true,
+      panelClass: 'custom-modal' // Aplica la clase personalizada
+    });
+
+    dialogRef.componentInstance.formSubmit.subscribe((updatedBook: Book) => {
+      this.updateBook(updatedBook);
+      dialogRef.close();
+    });
+  }
+
+
+  createBook(book: Book): void {
+    this.loading = true;
+    this.bookService.createBook(book).subscribe(() => {
+      this.getBooks();
+      this.loading = false;
+    });
+  }
+
+  updateBook(book: Book): void {
+    this.loading = true;
+    this.bookService.updateBook(book).subscribe(() => {
+      this.getBooks();
+      this.loading = false;
+    });
+  }
+
+  deleteBook(id: any): void {
+    this.loading = true;
+    this.bookService.deleteBook(id).subscribe(() => {
+      this.getBooks();
+      this.loading = false;
     });
   }
 
@@ -78,46 +119,5 @@ export class BookListComponent implements OnInit {
     this.filteredBooks = this.books.filter((book) =>
       book.title.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
-  }
-
-  openForm(): void {
-    this.selectedBook = null;
-    this.showForm = true;
-  }
-
-  editBook(book: Book): void {
-    this.selectedBook = book;
-    this.showForm = true;
-  }
-
-  onFormSubmit(book: Book): void {
-    this.loading = true;
-    if (book.id) {
-      this.bookService.updateBook(book).subscribe(() => {
-        this.getBooks();
-        this.showForm = false;
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
-      });
-    } else {
-      this.bookService.createBook(book).subscribe(() => {
-        this.getBooks();
-        this.showForm = false;
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
-      });
-    }
-  }
-
-  deleteBook(id: any): void {
-    this.loading = true;
-    this.bookService.deleteBook(id).subscribe(() => {
-      this.getBooks();
-      setTimeout(() => {
-        this.loading = false;
-      }, 500);
-    });
   }
 }

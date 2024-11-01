@@ -1,8 +1,12 @@
-form {
-  max-width: 400px;
-  margin: 0 auto;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  max-width: 500px;
+}
 
-  div {
-    margin-bottom: 10px;
-  }
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
 }
