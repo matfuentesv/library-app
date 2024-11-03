@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output, OnInit, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Book} from '../../../../core/models/book.model';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
@@ -63,8 +62,8 @@ export class BookFormEditComponent {
         cancelButtonText: 'Cancelar'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.formSubmit.emit(this.bookForm.value); // Emite el formulario solo si se confirma
-          this.dialogRef.close(this.bookForm.value); // Cierra el modal después de confirmar
+          this.formSubmit.emit(this.bookForm.value);
+          this.dialogRef.close(this.bookForm.value);
           Swal.fire(
             '¡Actualizado!',
             'El libro ha sido actualizado correctamente.',

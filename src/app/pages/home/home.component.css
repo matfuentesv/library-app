@@ -1,22 +1,22 @@
 .home-container {
   text-align: center;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #e1f5fe, #fce4ec); /* Gradiente azul claro a rosa claro */
-  color: #37474f; /* Gris oscuro para el texto */
+  background: linear-gradient(135deg, #e1f5fe, #fce4ec);
+  color: #37474f;
 }
 
 h1 {
   font-size: 2.5em;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #0277bd; /* Azul intermedio */
+  color: #0277bd;
 }
 
 p {
   font-size: 1.2em;
   margin-bottom: 30px;
   font-weight: 300;
-  color: #37474f; /* Gris oscuro */
+  color: #37474f;
 }
 
 .book-carousel {
@@ -25,21 +25,21 @@ p {
   justify-content: center;
   gap: 24px;
   padding: 20px;
-  background-color: #e8f5e9; /* Verde menta claro */
+  background-color: #e8f5e9;
 }
 
 .book-card {
   width: 250px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  background-color: #ffffff; /* Blanco */
-  color: #37474f; /* Gris oscuro */
+  background-color: #ffffff;
+  color: #37474f;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Efecto flotante */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
   .book-image-container {
@@ -67,26 +67,26 @@ mat-card-header {
   mat-card-title {
     font-size: 1.2em;
     font-weight: bold;
-    color: #0277bd; /* Azul intermedio */
+    color: #0277bd;
   }
 
   mat-card-subtitle {
     font-size: 0.95em;
-    color: #78909c; /* Gris azulado */
+    color: #78909c;
   }
 }
 
 .published-date {
   display: flex;
   align-items: center;
-  color: #78909c; /* Gris azulado */
+  color: #78909c;
   font-size: 0.95em;
   margin-top: 12px;
 
   .date-icon {
     margin-right: 6px;
     font-size: 1.2em;
-    color: #0277bd; /* Azul intermedio */
+    color: #0277bd;
   }
 }
 
@@ -98,14 +98,14 @@ mat-card-actions {
   .detail-button {
     padding: 10px 20px;
     font-weight: bold;
-    color: #ffffff; /* Blanco */
+    color: #ffffff;
     border-radius: 20px;
     text-transform: uppercase;
-    background-color: #4db6ac; /* Verde menta */
+    background-color: #4db6ac;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #00897b; /* Verde menta más oscuro en hover */
+      background-color: #00897b;
     }
   }
 }

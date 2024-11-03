@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   startCarousel(): void {
     this.intervalId = setInterval(() => {
       this.nextSlide();
-    }, 3000); // Cambia cada 3 segundos
+    }, 3000);
   }
 
   stopCarousel(): void {

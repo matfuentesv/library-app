@@ -66,8 +66,8 @@ export class BookListComponent implements OnInit {
   openCreateForm(): void {
     const dialogRef = this.dialog.open(BookFormComponent, {
       width: '500px',
-      disableClose: true, // Evita el cierre accidental del modal
-      panelClass: 'custom-modal' // Clase personalizada para estilos del modal
+      disableClose: true,
+      panelClass: 'custom-modal'
     });
 
     dialogRef.componentInstance.formSubmit.subscribe((newBook: Book) => {
@@ -82,17 +82,15 @@ export class BookListComponent implements OnInit {
       data: book,
     });
 
-    // Suscríbete al evento formSubmit para actualizar el libro existente
+
     dialogRef.componentInstance.formSubmit.subscribe((updatedBook: any) => {
       // Llama al método updateBook y no createBook
       this.bookService.updateBook(updatedBook).subscribe(() => {
-        this.getBooks(); // Refresca la lista después de actualizar
+        this.getBooks();
       });
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      // Opcional: lógica adicional después de cerrar el modal
-    });
+
   }
 
 
@@ -127,7 +125,7 @@ export class BookListComponent implements OnInit {
       if (result.isConfirmed) {
         this.loading = true;
         this.bookService.deleteBook(id).subscribe(() => {
-          this.getBooks(); // Refresca la lista después de la eliminación
+          this.getBooks();
           this.loading = false;
           Swal.fire(
             '¡Eliminado!',
