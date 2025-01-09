@@ -16,7 +16,8 @@ import {NgIf} from '@angular/common';
 })
 export class HeaderComponent {
 
-  constructor(private msalService: MsalService) {}
+  constructor(private msalService: MsalService,
+              private authService: MsalService) {}
 
   usuarioEstaConectado(): boolean {
     return this.msalService.instance.getActiveAccount() !== null;
@@ -34,7 +35,16 @@ export class HeaderComponent {
             localStorage.setItem('jwt', tokenResponse.idToken);
           }
         });
+        this.obtenerUsuario();
       });
+  }
+
+  obtenerUsuario(): string {
+    if (this.authService.instance.getActiveAccount() == null) {
+      return 'error';
+    }
+    // @ts-ignore
+    return this.authService.instance.getActiveAccount().name;
   }
 
   cerrarSesion(): void {

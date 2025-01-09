@@ -5,6 +5,7 @@
       <a routerLink="/">Inicio</a>
       <a routerLink="/book-list">Libros</a>
       <a (click)="iniciarSesion()" *ngIf="!usuarioEstaConectado()">Iniciar Sesión</a>
+      <p *ngIf="usuarioEstaConectado()">Hola,{{obtenerUsuario()}}</p>
       <a (click)="cerrarSesion()" *ngIf="usuarioEstaConectado()">Cerrar Sesión</a>
     </div>
   </nav>
