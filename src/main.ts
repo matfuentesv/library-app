@@ -9,12 +9,7 @@ import {importProvidersFrom} from '@angular/core';
 import {MatNativeDateModule, provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
+import {appConfig} from './app/app.config';
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideHttpClient(),
-    provideRouter(routes),
-    importProvidersFrom(BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatInputModule),
-    provideNativeDateAdapter()
-  ]
-}).catch(err => console.error(err));
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));

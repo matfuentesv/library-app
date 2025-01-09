@@ -4,6 +4,8 @@
     <div class="nav-links">
       <a routerLink="/">Inicio</a>
       <a routerLink="/book-list">Libros</a>
+      <a (click)="iniciarSesion()" *ngIf="!usuarioEstaConectado()">Iniciar Sesión</a>
+      <a (click)="cerrarSesion()" *ngIf="usuarioEstaConectado()">Cerrar Sesión</a>
     </div>
   </nav>
 </header>
