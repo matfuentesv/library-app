@@ -1,4 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%; /* Ocupa toda la altura de la ventana */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* El contenedor raíz debe ocupar toda la ventana */
+}
+
+main {
+  flex: 1; /* Este contenedor crecerá para empujar el footer hacia abajo */
+}
+
+app-footer {
+  background-color: #b3e5fc; /* Azul claro */
+  color: #37474f; /* Gris oscuro */
+  text-align: center;
+  padding: 10px;
+}
+
